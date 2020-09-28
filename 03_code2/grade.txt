@@ -1,4 +1,4 @@
-Grading at Mon Sep 28 18:49:35 UTC 2020
+Grading at Mon Sep 28 18:51:57 UTC 2020
 Checking code2.c for legal syntax
 Checking for int printTriangle (int size)
 Found on line 4, column 1 
