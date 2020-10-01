@@ -43,11 +43,11 @@ void squares(int size1, int x_offset, int y_offset, int size2) {
       //    ((y is between y_offset and y_offset + size2) AND
       //     x is equal to either x_offset OR x_offset + size2 -1)
               // if so, print a *
-      if (x_r1 && y_r1 || y_r2 && x_r2) printf("*");
+      if ((x_r1 && y_r1) || (y_r2 && x_r2)) printf("*");
       else {
 	      if (
-          (x < size1) && ((y == 0) || (y == size1 - 1)) ||
-          (y < size1) && ((x == 0) || (x == size1 - 1))
+          ((x < size1) && ((y == 0) || (y == size1 - 1))) ||
+          ((y < size1) && ((x == 0) || (x == size1 - 1)))
         ) printf("#");
         else printf(" ");
       }
