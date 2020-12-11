@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+
 //I've provided "min" and "max" functions in
 //case they are useful to you
 int min (int a, int b) {
@@ -16,15 +17,96 @@ int max (int a, int b) {
 }
 
 //Declare your rectangle structure here!
+struct rect_tag{
+  int x;
+  int y;
+  int width;
+  int height;
+};
 
+typedef struct rect_tag rectangle;
 
 rectangle canonicalize(rectangle r) {
   //WRITE THIS FUNCTION
+  if(r.width < 0){
+    r.x = r.x - abs(r.width);
+    r.width = abs(r.width);
+  }
+
+  if(r.height < 0){
+    r.y = r.y - abs(r.height);
+    r.height = abs(r.height);
+  }
+
   return r;
 }
+int check_y(rectangle r1, rectangle r2){
+  rectangle r;
+  r.height = 0;
+
+  if(r1.y > r2.y){
+    if(r1.y < r2.y + r2.height)
+      r.height = r1.y + r1.height < r2.y + r2.height ? r1.height : r2.y + r2.height - r1.y;
+    else r.height = 0;
+  }
+  else if(r1.y == r2.y) r.height = r1.y + r1.height < r2.y + r2.height ? r1.height : r2.height;
+  else{
+    if(r2.y < r1.y + r1.height)
+      r.height = r2.y + r2.height < r1.y + r1.height ? r2.height : r1.y + r1.height - r2.y;
+    else r.height = 0;
+  }
+
+  return r.height;
+}
+
 rectangle intersection(rectangle r1, rectangle r2) {
   //WRITE THIS FUNCTION
-  return r1;
+  rectangle r;
+
+  r1 = canonicalize(r1);
+  r2 = canonicalize(r2);
+
+  r.x = max(r1.x, r2.x);
+  r.y = max(r1.y, r2.y);
+
+  if(r1.x > r2.x){
+    if(r1.x < r2.x + r2.width){
+      if(r2.y <= r1.y + r1.height)
+	r.width = r1.x + r1.width < r2.x + r2.width ? r1.width : r2.x + r2.width - r1.x;
+      else r.width = 0;
+      r.height = check_y(r1, r2);
+    }
+    else if(r1.x == r2.x + r2.width){
+      r.width = 0;
+      r.height = check_y(r1, r2);
+    }
+    else{
+      r.width = 0;
+      r.height = 0;
+    }
+  }
+  else if(r1.x == r2.x){
+    r.width = r1.x + r1.width < r2.x + r2.width ? r1.width : r2.width;
+    r.height = check_y(r1, r2);
+  }
+  else{
+    if(r2.x < r1.x + r1.width){
+      if(r1.y <= r2.y + r2.height)
+	r.width = r2.x + r2.width < r1.x + r1.width ? r2.width : r1.x + r1.width - r2.x;
+      else r.width = 0;
+      r.height = check_y(r1, r2);
+    }
+    else if(r2.x == r1.x + r1.width){
+      r.width = 0;
+      r.height = check_y(r1, r2);
+    }
+    else{
+      r.width = 0;
+      r.height = 0;
+    }
+  }
+
+  return r;
 }
 
 //You should not need to modify any code below this line
@@ -34,8 +116,8 @@ void printRectangle(rectangle r) {
     printf("<empty>\n");
   }
   else {
-    printf("(%d,%d) to (%d,%d)\n", r.x, r.y, 
-	                           r.x + r.width, r.y + r.height);
+    printf("(%d,%d) to (%d,%d)\n", r.x, r.y,
+	   r.x + r.width, r.y + r.height);
   }
 }
 
@@ -58,7 +140,7 @@ int main (void) {
   r2.height = -7;
   printf("r2 is ");
   printRectangle(r2);
-  
+
   r3.x = -2;
   r3.y = 7;
   r3.width = 7;
@@ -81,7 +163,7 @@ int main (void) {
   i = intersection(r1,r2);
   printf("intersection(r1,r2): ");
   printRectangle(i);
-  
+
   i = intersection(r1,r3);
   printf("intersection(r1,r3): ");
   printRectangle(i);
@@ -98,7 +180,7 @@ int main (void) {
   i = intersection(r2,r2);
   printf("intersection(r2,r2): ");
   printRectangle(i);
-  
+
   i = intersection(r2,r3);
   printf("intersection(r2,r3): ");
   printRectangle(i);
@@ -115,7 +197,7 @@ int main (void) {
   i = intersection(r3,r2);
   printf("intersection(r3,r2): ");
   printRectangle(i);
-  
+
   i = intersection(r3,r3);
   printf("intersection(r3,r3): ");
   printRectangle(i);
@@ -132,7 +214,7 @@ int main (void) {
   i = intersection(r4,r2);
   printf("intersection(r4,r2): ");
   printRectangle(i);
-  
+
   i = intersection(r4,r3);
   printf("intersection(r4,r3): ");
   printRectangle(i);
