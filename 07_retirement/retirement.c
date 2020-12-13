@@ -2,7 +2,7 @@
 #include <stdlib.h>
 
 struct _retire_info{
-  int month;              //the number of months it is applicable to
+  int months;              //the number of months it is applicable to
   double contribution;    //how many dollars are contributed (or spent if negative) from the account per month
   double rate_of_return;  //for the rate of returns (после инфляции)
 };
@@ -10,7 +10,7 @@ struct _retire_info{
 typedef struct _retire_info retire_info;
 
 double print_the_calculation (int startAge, double initial, retire_info name){
-  for(int i = 0; i < name.month; i++){
+  for(int i = 0; i < name.months; i++){
     printf("Age %3d month %2d you have $%.2lf\n", startAge / 12, startAge % 12, initial);
     initial += name.contribution + initial * name.rate_of_return;
     startAge++;
@@ -27,7 +27,7 @@ void retirement(int startAge,         //in months
 
   new_initial = print_the_calculation(startAge, initial, working);
 
-  startAge += working.month;
+  startAge += working.months;
 
   print_the_calculation(startAge, new_initial, retired);
 }
@@ -36,11 +36,11 @@ int main(){
   retire_info working;
   retire_info retired;
 
-  working.month = 489;
+  working.months = 489;
   working.contribution = 1000;
   working.rate_of_return = 0.045/12;
 
-  retired.month = 384;
+  retired.months = 384;
   retired.contribution = -4000;
   retired.rate_of_return = 0.01/12;
 
