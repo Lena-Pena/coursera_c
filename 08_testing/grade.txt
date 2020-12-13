@@ -1,21 +1,16 @@
-Grading at Sun Dec 13 21:40:05 UTC 2020
+Grading at Sun Dec 13 21:51:09 UTC 2020
 #################################################
 test input.1:
-I expected to find a file called 'input.1' but it did not exist
-(or was not a regular file)
-Here are the files that I can find:
-input.4
-isPrime-broken1
-isPrime-broken2
-isPrime-broken3
-isPrime-broken4
-isPrime-correct
-README
+Your file matched the expected output
+input.1 passed
 #################################################
 test input.2:
 I expected to find a file called 'input.2' but it did not exist
 (or was not a regular file)
 Here are the files that I can find:
+correct.txt
+grade.txt
+input.1
 input.4
 isPrime-broken1
 isPrime-broken2
@@ -23,11 +18,15 @@ isPrime-broken3
 isPrime-broken4
 isPrime-correct
 README
+student.txt
 #################################################
 test input.3:
 I expected to find a file called 'input.3' but it did not exist
 (or was not a regular file)
 Here are the files that I can find:
+correct.txt
+grade.txt
+input.1
 input.4
 isPrime-broken1
 isPrime-broken2
@@ -35,9 +34,10 @@ isPrime-broken3
 isPrime-broken4
 isPrime-correct
 README
+student.txt
 #################################################
 test input.4:
 Your file matched the expected output
 input.4 passed
 
-Overall Grade: D
+Overall Grade: C
