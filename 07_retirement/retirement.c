@@ -46,5 +46,5 @@ int main(){
 
   retirement(327, 21345, working, retired);
 
-  return 0;
+  return EXIT_SUCCESS;
 }
